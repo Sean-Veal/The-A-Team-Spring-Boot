@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Trainer Page</title>
+</head>
+<body>
+	<section id="viewTrainerContainer">
+	<header>
+		<h1>Trainer Catalog:</h1>
+	</header>
+	<!-- Populate the trainer data -->
+	<article class="trainerDetailContainer" ng-repeat="trainer in trainers">
+		<header>
+		<!-- Click on first/last name to have a modal pop up -->
+		<h3 ng-click="modalView=true;">{{trainer.trainerFirstName}} {{trainer.trainerLastName}}</h3>
+		</header>
+		<!-- Include the trainer's location and status below the header(First/Last name) -->
+		<div class="locationLabel"><p>Location: {{trainer.trainerLocationID.locationName}}</p></div>
+		<div class="statusLabel"><p>Status: {{trainer.trainerStatusID.tName}}</p></div>
+		<div id="myModal" class="modal" ng-show="modalView">
+			<!-- Modal content -->
+		  	<div class="modal-content">
+		    	<span class="close" ng-click="modalView=false;">×</span>
+		    	<h3>{{trainer.trainerFirstName}} {{trainer.trainerLastName}}</h3>
+		    	<div class="locationLabel"><p>Location: {{trainer.trainerLocationID.locationName}}</p></div>
+		    	<div class="statusLabel"><p>Status: {{trainer.trainerStatusID.tName}}</p></div>
+		    	<h4>Skillset:</h4>
+		    	<div class="trainerDetailSkillList" ng-repeat="skill in trainer.skill">
+		    		<p class="trainerDetailSkill">{{skill.skillName}}</p>
+		    	</div>
+		    	<h4>Unavailable Days:</h4>
+		    	<div class="trainerDetailSkillList" ng-repeat="away in trainer.unavailable">
+		    		<p class="trainerDetailSkill">{{createDate(away.unavailableStartDate)}} to {{createDate(away.unavailableEndDate)}}</p>
+		    	</div>
+		    </div>
+		</div>
+	</article>
+	<footer></footer>
+	</section>
+	<br><br>
+</body>
+</html>
